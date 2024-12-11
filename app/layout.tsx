@@ -22,7 +22,7 @@ export default function RootLayout({
     <ClerkProvider localization={ptBR}>
     <html lang="en">
     <head>
-      <link rel="manifest" href="/manifest.json" />
+      <link rel="manifest" href="./manifest.json" />
     </head>
       <body className={font.className}>
         <Toaster />
