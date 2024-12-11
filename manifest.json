@@ -16,7 +16,7 @@
   "theme_color": "#000000",
   "background_color": "#000000",
   "display": "standalone",
-  "start_url": "/",
+  "start_url": "https://moba-tkwell-1auzwl27s-vncsszs-projects.vercel.app/",
   "id": "TKWell",
   "description": "TKWell",
   "lang": "pt"
