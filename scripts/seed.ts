@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as schema from "../db/schema";
 
-const sql = neon("postgresql://thinkwell_owner:4WYyXNQsJfO0@ep-young-lake-a5jfsqhv.us-east-2.aws.neon.tech/thinkwell?sslmode=require")
+const sql = neon(process.env.DATABASE_URL!)
 
 const db = drizzle(sql, { schema })
 

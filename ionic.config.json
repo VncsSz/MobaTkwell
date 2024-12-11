@@ -1,7 +1,0 @@
-{
-  "name": "tkwell",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "custom"
-}
