@@ -21,6 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={ptBR}>
     <html lang="en">
+    <link rel="manifest" href="manifest.webmanifest"/>
       <body className={font.className}>
         <Toaster />
         <ExitModal />
