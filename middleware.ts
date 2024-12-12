@@ -1,24 +1,16 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-const isAdminRoute = createRouteMatcher(['/admin(.*)'])
-const isPublicRoute = createRouteMatcher(['/', '/buttons'])
+const isPublicRoute = createRouteMatcher(["/","/manifest.webmanifest"])
 
-export default clerkMiddleware(
-  (auth, req) => {
-    // strategy to protect all routes except public routes
-    if (isPublicRoute(req)) return // if it's a public route, do nothing
-
-    // Restrict admin route to users with specific role
-    if (isAdminRoute(req)) auth().protect({ role: 'org:admin' })
-
-    auth().protect() // for any other route, require auth
-  },
-  (req) => ({
-    clockSkewInMs: 10000,
-  }),)
+export default clerkMiddleware((auth, request) => {
+  if (!isPublicRoute(request)) {
+    auth().protect()
+  }
+},
+(req) => ({
+  clockSkewInMs: 10000,
+}),)
 
 export const config = {
-  // The following matcher runs middleware on all routes
-  // except static assets.
-  matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ['/((?!.*\\..*|_next).*)', '/', '/manifest.webmanifest', '/(api|trpc)(.*)'],
 }
