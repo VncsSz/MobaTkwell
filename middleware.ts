@@ -13,7 +13,8 @@ export default clerkMiddleware((auth, request) => {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon\\.ico|manifest\\.json|icons(?:/.*)?|.*\\.(?:css|js|json|jpg|jpeg|png|webp|gif|svg|woff|woff2|ttf|eot|otf)).*)',
-    '/(api|trpc)(.*)',
+    '/((?!_next/static/|_next/image|favicon.ico|manifest.json|icons/).*)',
+    '/api/:path*',
+    '/trpc/:path*',
   ],
 }
