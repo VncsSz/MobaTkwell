@@ -1,27 +1,20 @@
-import { Footer } from "./footer";
-import { Header } from "./header";
+import { Footer } from "./footer"
+import { Header } from "./header"
 
-type Props = {
-  children: React.ReactNode;
-};
+type Props ={
+    children: React.ReactNode
+}
 
 const MarketingLayout = ({ children }: Props) => {
-  return (
-    <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-      </head>
-      <body>
+    return (
         <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-1 flex flex-col items-center justify-center">
+            <Header/>
+            <main className="flex-1 flex flex-col items-center justify-center">
             {children}
-          </main>
-          <Footer />
+            </main>  
+            <Footer/>
         </div>
-      </body>
-    </html>
-  );
-};
+    )
+}
 
-export default MarketingLayout;
+export default MarketingLayout
