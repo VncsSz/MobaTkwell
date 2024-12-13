@@ -7,10 +7,9 @@ export default clerkMiddleware((auth, request) => {
     auth().protect()
   }
 },
-{
+(req) => ({
   clockSkewInMs: 10000,
-  debug: true
-},)
+}),)
 
 export const config = {
   matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
