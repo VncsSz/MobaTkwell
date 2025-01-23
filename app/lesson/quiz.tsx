@@ -1,14 +1,21 @@
 "use client"
 
 import { challengeOptions, challenges } from "@/db/schema"
-import { useState, useTransition } from "react"
+import { useState, useTransition, useEffect } from "react"
 import { Header } from "./header"
+import Confetti from "react-confetti"
 import { QuestionBubble } from "./question-bubble"
 import { Challenge } from "./challenge"
 import { Footer } from "./footer"
 import { upsertChallengeProgress } from "@/actions/challenge-progress"
 import { toast } from "sonner"
 import { reduceHearts } from "@/actions/user-progress"
+import { useAudio, useWindowSize, useMount } from "react-use"
+import Image from "next/image"
+import { ResultCard } from "./result-card"
+import { useRouter } from "next/navigation"
+import { useHeartsModal } from "@/store/use-hearts-modal"
+import { usePracticeModal } from "@/store/use-practice-modal"
 
 type Props = {
     initialPercentage: number
@@ -28,11 +35,35 @@ export const Quiz = ({
     initialLessonChallenges,
     userSubscription
 }: Props) => {
+    const router = useRouter()
+    const { open: openHeartsModal } = useHeartsModal()
+    const { open: openPracticeModal } = usePracticeModal()
+
+    useMount(() => {
+        if (initialPercentage === 100) {
+            openPracticeModal()
+        }
+    })
+
+    const {width, height} = useWindowSize()
+    const [finishAudio] = useAudio({src: "/audio/finish.mp3", autoPlay: true})
+    const [
+        correctAudio,
+        _c,
+        correctControls,
+    ] = useAudio({ src: "/audio/correct.wav"})
+    const [
+        incorrectAudio,
+        _i,
+        incorrectControls,
+    ] = useAudio({ src: "/audio/incorrect.wav"})
 
     const [pending, startTransition] = useTransition()
-    
+    const [lessonId] = useState(initialLessonId)
     const [hearts, setHearts] = useState(initialHearts)
-    const [percentage, setPercentage] = useState(initialPercentage)
+    const [percentage, setPercentage] = useState(() => {
+        return initialPercentage === 100 ? 0 : initialPercentage
+    })
     const [challenges] = useState(initialLessonChallenges)
     const [activeIndex, setActiveIndex] = useState(() => {
         const uncompletedIndex = challenges.findIndex((challenge) => !challenge.completed)
@@ -49,41 +80,56 @@ export const Quiz = ({
 
         setSelecetedOption(id)
     }
-    const title = challenge.type === "ASSIST" ? "Complete o jogo para avançar" : challenge.question
+    //const title = challenge.type === "ASSIST" ? "Complete o jogo para avançar" : challenge.question
     const onNext = () => {
         setActiveIndex((current) => current + 1)
     }
     
     const [gameMessage, setGameMessage] = useState(false);
+    const [gameCompleted, setGameCompleted] = useState(false);
 
-    window.addEventListener('message', (event) => {
-        if (event.data.gameStatus === 'completed' && event.data.gameID === 'ratoQueijoFase2') {
-            setGameMessage(true);
-            if (gameMessage){
-                onContinue(); // EVENTO ESTA SENDO PASSADO 2 VEZES
+    useEffect(() => {
+        // Certifique-se de que o código só roda no client-side
+        const handleMessage = (event: MessageEvent) => {
+            if (gameMessage) {
+                return; // Evita múltiplas execuções
             }
-        }
-    });
+
+            setGameMessage(true);
+            setGameCompleted(event.data.gameStatus);
+        };
+
+        window.addEventListener("message", handleMessage);
+
+        // Cleanup para evitar múltiplos listeners
+        return () => {
+            window.removeEventListener("message", handleMessage);
+        };
+    }, [gameMessage]);
 
     const onContinue = () => {
         //APAGAR ESSE RETURN
 
+        //Só poder liberar o jogo novamente quando passar por esse IF (seja por enviar uma mensagem p jogo reiniciar ou bloquear o iframe)
         if (status === "wrong") {
             setStatus("none")
             setSelecetedOption(undefined)
+            setGameMessage(false)
             return
         }
 
+        //Só poder liberar o jogo novamente quando passar por esse IF (seja por enviar uma mensagem p jogo reiniciar ou bloquear o iframe)
         if (status === "correct") {
             onNext();
             setStatus("none")
             setSelecetedOption(undefined)
+            setGameMessage(false)
             return
         }
 
         console.log(gameMessage)
         
-        const correctOption = options.find((option) => option.correct)
+       // const correctOption = options.find((option) => option.correct)
         // DEFINIR COMO VAI FICAR A PARTE DA OPÇÂO CORRETA PARA ATIVAR O BOTAO NEXT
 
        //if (!correctOption){
@@ -91,14 +137,15 @@ export const Quiz = ({
         //}
         
         //ADICONAR O RETORNO DO IFRAME PARA "OPÇAO CORRETA" QUANDO O JOGO É CONCLUIDO
-        if(gameMessage) {
+        if(gameCompleted) {
             startTransition(() => {
                 upsertChallengeProgress(challenge.id).then((response) => {
                     if (response?.error === "hearts") {
-                        console.error("Falta vidas")
+                        openHeartsModal()
                         return
                     }
 
+                    correctControls.play()
                     setStatus("correct");
                     setPercentage((prev) => prev + 100/ challenges.length)
 
@@ -111,10 +158,10 @@ export const Quiz = ({
             startTransition(() => {
                 reduceHearts(challenge.id).then((response) => {
                     if (response?.error === "hearts") {
-                        console.error("Falta vidas")
+                        openHeartsModal()
                         return
                     }
-
+                    incorrectControls.play()
                     setStatus("wrong")
 
                     if(!response?.error) {
@@ -124,10 +171,60 @@ export const Quiz = ({
             })
         }
     }
-
+    //Finish Screen *
+    if (!challenge) {
+        return(
+            <>
+            {finishAudio}
+            <Confetti 
+            width={width}
+            height={height}
+            recycle={false}
+            numberOfPieces={500}
+            tweenDuration={10000}
+            />
+            <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
+                <Image
+                    src="/finish.svg"
+                    alt="Finish"
+                    className="hidden lg:block"
+                    height={100}
+                    width={100}
+                />
+                <Image
+                    src="/finish.svg"
+                    alt="Finish"
+                    className="block lg:hidden"
+                    height={50}
+                    width={50}
+                />
+                <h1 className="text-xl lg:text-3xl font-bold text-neutral-700">
+                    Muito bem! <br /> Você concluiu os desafios.
+                </h1>
+                <div className="flex items-center gap-x-4 w-full">
+                    <ResultCard
+                        variant="points"
+                        value={challenges.length * 10}
+                    />
+                    <ResultCard
+                        variant="hearts"
+                        value={hearts}
+                    />
+                </div>
+            </div>
+            <Footer 
+            lessonId={lessonId}
+            status="completed"
+            onCheck={() => router.push("/learn")}
+            />
+            </>
+        )
+    }
 
     return (
         <>
+            {incorrectAudio}
+            {correctAudio}
             <Header 
                 hearts={hearts}
                 percentage={percentage}
@@ -135,10 +232,7 @@ export const Quiz = ({
             />
             <div className="flex-1">
                 <div className="h-full flex items-center justify-center">
-                    <div className="lg:min-h-[350px] lg:w-[500px] w-full px-6 lg:px-0 flex flex-col gap-y-12">
-                        <h1 className="text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700">
-                            {title}
-                        </h1>
+                    <div className="lg:min-h-[350px] w-full lg:px-0 flex flex-col gap-y-12 max-h-full max-w-full">
                         <div>
                             {challenge.type === "ASSIST" && (
                                 <QuestionBubble question={challenge.question} />
@@ -148,7 +242,7 @@ export const Quiz = ({
                                 options={options}
                                 onSelect={onSelect}
                                 status={status}
-                                selectedOption = {selectedOption}
+                                selectedOption = {gameMessage}
                                 disabled = {pending}
                                 type = {challenge.type}
                             />
@@ -157,7 +251,7 @@ export const Quiz = ({
                 </div>
             </div>
             <Footer 
-                disabled={pending || !selectedOption}
+                disabled={pending || !gameMessage}
                 status={status}
                 onCheck={onContinue}
             />

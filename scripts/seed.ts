@@ -88,14 +88,21 @@ const main = async () => {
                 lessonId: 1,
                 type: "SELECT",
                 order: 1,
-                question: 'Ajude o rato chegar até o queijo',
+                question: '',
             },
             {
                 id: 2,
                 lessonId: 1,
                 type: "SELECT",
                 order: 2,
-                question: 'Cuidado com o labirinto',
+                question: '',
+            },
+            {
+                id: 3,
+                lessonId: 2,
+                type: "SELECT",
+                order: 1,
+                question: '',
             },
         ])
 
@@ -105,7 +112,7 @@ const main = async () => {
                 challengeId: 1,
                 imageSrc: "/verde.svg",
                 correct: true,
-                game: "https://tk-games.vercel.app/games/maze-runner.html",
+                game: "https://tk-games.vercel.app/games/MazeG/index.html",
                 audioSrc: "/verde.mp3",
             },
             {
@@ -113,11 +120,11 @@ const main = async () => {
                 challengeId: 2,
                 imageSrc: "/verde.svg",
                 correct: true,
-                game: "https://tk-games.vercel.app/games/rat-cheese.html",
+                game: "https://tk-games.vercel.app/games/maze-runner.html",
                 audioSrc: "/verde.mp3",
             },
         ])
-
+        
 
         console.log("Seed finished")
 

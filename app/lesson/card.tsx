@@ -1,5 +1,6 @@
 import { challenges } from "@/db/schema"
 import { cn } from "@/lib/utils"
+import { Loader } from "lucide-react"
 import Image from "next/image"
 import { useCallback } from "react"
 import { useAudio, useKey } from "react-use"
@@ -42,20 +43,42 @@ export const Card = ({
 
     return (
         <div
-            onClick={handleClick}
-            className={cn("h-full border-2 rounded-xl border-b-4 hover:bg-black/5 p-4 lg:p-6 cursor-pointer active:border-b-2",
-                type === "ASSIST" && "lg:p-3 w-full"
-            )}
-        >
-                <div
-                    className="relative aspect-square mb-4 max-h-[80px] lg:max-h-[400px] w-full"
-                >
-                    <iframe 
-                    src={`${game}`}
-                    width="400px"
-                    height='400px'
-                    ></iframe>
-                </div>
-        </div>
+  onClick={handleClick}
+  className={cn(
+    "h-full border-2 p-4 lg:p-6 cursor-pointer max-h-full max-w-full flex justify-center items-center relative",
+    type === "ASSIST" && "lg:p-3 w-full"
+  )}
+>
+  <div className="relative w-full h-full flex justify-center items-center">
+    {/* Iframe principal */}
+    <iframe 
+    src={`${game}`}
+    width="1140px"
+    height='420px'
+    ></iframe>
+
+    {/* Loading Overlay */}
+    {selected && (
+      <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-80 text-white text-2xl">
+        <Loader className="h-5 w-5 text-muted-foreground animate-spin" />
+      </div>
+    )}
+
+    {/* Correct Overlay */}
+    {selected && status === "correct" && (
+      <div className="absolute inset-0 flex justify-center items-center bg-green-500 bg-opacity-90 text-white text-2xl font-bold">
+        🎉 Parabéns! 🎉
+      </div>
+    )}
+
+    {/* Wrong Overlay */}
+    {selected && status === "wrong" && (
+      <div className="absolute inset-0 flex justify-center items-center bg-red-500 bg-opacity-90 text-white text-2xl font-bold">
+        ❌ Tente Novamente ❌
+      </div>
+    )}
+  </div>
+</div>
+
     )
 }

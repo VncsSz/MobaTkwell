@@ -2,12 +2,13 @@ import { useKey, useMedia } from "react-use"
 import { CheckCircle, XCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useEffect } from "react"
 
 type Props = {
     onCheck: () => void
     status: "correct" | "wrong" | "none" | "completed"
     disabled?: boolean
-    lessonId?: boolean
+    lessonId?: number
 }
 
 export const Footer = ({
@@ -18,6 +19,12 @@ export const Footer = ({
 }: Props) => {
     //Usa o teclado para confirmar a seleção, assim como o shortcut (remover ambos)
     useKey("Enter", onCheck, {}, [onCheck])
+
+    useEffect(() => {
+        if (!disabled && status === "none") {
+            onCheck();
+        }
+    }, [disabled, status, onCheck]);
 
     const isMobile = useMedia("(max-width: 1024px)")
 
@@ -51,13 +58,14 @@ export const Footer = ({
                 )}
                 <Button
                     disabled={disabled}
-                    className="ml-auto"
+                    className={cn("ml-auto", status === "none" && "hidden")}
+
                     onClick={onCheck}
                     size={isMobile ? "sm" : "lg"}
                     variant={status === "wrong" ? "danger" : "secondary"}
                 >
-                    {status === "none" && "Checar"}
-                    {status === "correct" && "Continuar"}
+                    {status === "none" && "Continuar"}
+                    {status === "correct" && "Avançar"}
                     {status === "wrong" && "Repetir"}
                     {status === "completed" && "Finalizar"}
                 </Button>
