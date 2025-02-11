@@ -3,11 +3,10 @@
 import { refillHearts } from "@/actions/user-progress"
 import { createStripeUrl } from "@/actions/user-subscription"
 import { Button } from "@/components/ui/button"
+import { POINTS_TO_REFILL } from "@/constants"
 import Image from "next/image"
 import { useTransition } from "react"
 import { toast } from "sonner"
-
-const POINTS_TO_REFILL = 10
 
 type Props = {
     hearts: number
@@ -58,6 +57,7 @@ export const Items = ({
                     </p>
                 </div>
                 <Button 
+                     //Desativar botão se o usuario for vip
                     disabled={hearts === 5 || points < POINTS_TO_REFILL || pending}
                     onClick={onRefillHearts}
                     >

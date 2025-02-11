@@ -1,6 +1,6 @@
 "use client"
 
-import { challengeOptions, challenges } from "@/db/schema"
+import { challengeOptions, challenges, userSubscription } from "@/db/schema"
 import { useState, useTransition, useEffect } from "react"
 import { Header } from "./header"
 import Confetti from "react-confetti"
@@ -25,7 +25,9 @@ type Props = {
         completed: boolean
         challengeOptions: typeof challengeOptions.$inferSelect[]
     })[]
-    userSubscription: any
+    userSubscription: typeof userSubscription.$inferInsert & {
+        isActive: boolean
+    } | null
 }
 
 export const Quiz = ({ 
@@ -172,6 +174,7 @@ export const Quiz = ({
         }
     }
     //Finish Screen *
+    //Fiz Inifinity icon and a real XP points after shopping
     if (!challenge) {
         return(
             <>
