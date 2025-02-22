@@ -6,7 +6,7 @@ import {
 import { Sidebar } from "@/components/sidebar";
 import { Menu } from "lucide-react";
 
-
+//Fechar sidebar ao trocar de aba no mobile
 export const MobileSidebar = () => {
     return (
         <Sheet>
