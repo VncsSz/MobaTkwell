@@ -11,16 +11,17 @@ import { Loader } from "lucide-react";
 
 type Props = {
     className?: string;
+    onSelect?: () => void;
 };
 
-export const Sidebar = ({ className }: Props) => {
+export const Sidebar = ({ className, onSelect }: Props) => {
     return (
         <div className={cn("flex h-full lg:w-[256px] lg:fixed left-0 top-0 px-4 border-r-2 flex-col", 
             className,
         )}>
-            <Link href="/learn">
+            <Link href="/learn" onClick={onSelect}>
                 <div className="pt-8 pl-4 pb-7 flex items-center gap-x-3">
-                    <Image src="/TWHeader.svg" height={40} width={40} alt="Mascot"/>
+                    <Image src="/img/TWHeader.svg" height={40} width={40} alt="Mascot"/>
                     <h1 className="text-2xl font-extrabold text-purple-600 tracking-wide">
                         ThinkWell
                     </h1>
@@ -31,25 +32,29 @@ export const Sidebar = ({ className }: Props) => {
                 <SidebarItem 
                 label="Aprenda" 
                 href="/learn"
-                iconSrc="/learn.svg"
+                iconSrc="/img/learn.svg"
+                onSelect={onSelect}
                 />
 
                 <SidebarItem 
                 label="Classificações" 
                 href="/leaderboard"
-                iconSrc="/leaderboard.svg"
+                iconSrc="/img/leaderboard.svg"
+                onSelect={onSelect}
                 />
 
                 <SidebarItem 
                 label="Missões" 
                 href="/quests"
-                iconSrc="/quests.svg"
+                iconSrc="/img/quests.svg"
+                onSelect={onSelect}
                 />
 
                 <SidebarItem 
                 label="Compras" 
                 href="/shop"
-                iconSrc="/shop.svg"
+                iconSrc="/img/shop.svg"
+                onSelect={onSelect}
                 />
             </div>
             <div className="p-4">

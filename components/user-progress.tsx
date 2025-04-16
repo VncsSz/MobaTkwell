@@ -19,7 +19,7 @@ export const UserProgress = ({ activeCourse, points, hearts, hasActiveSubscripti
                 <Image 
                     src={activeCourse.imageSrc}
                     alt={activeCourse.title}
-                    className="rounded-md border"
+                    className="rounded-md"
                     width={32}
                     height={32}
                 />
@@ -28,14 +28,14 @@ export const UserProgress = ({ activeCourse, points, hearts, hasActiveSubscripti
 
             <Link href="/shop">
                 <Button variant="ghost" className="text-orange-500">
-                    <Image src="/points.svg" height={28} width={28} alt="Points" className="mr-2" />
+                    <Image src="/img/points.svg" height={28} width={28} alt="Points" className="mr-2" />
                     {points}
                 </Button>
             </Link>
 
             <Link href="/shop">
                 <Button variant="ghost" className="text-rose-500">
-                    <Image src="/heart.svg" height={22} width={22} alt="Hearts" className="mr-2" />
+                    <Image src="/img/heart.svg" height={22} width={22} alt="Hearts" className="mr-2" />
                     {hasActiveSubscription ? <InfinityIcon className="h-4 w-4 stroke-[3]" /> : hearts}
                 </Button>
             </Link>

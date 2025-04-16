@@ -31,7 +31,7 @@ export const ExitModal = () => {
                 <DialogHeader>
                     <div className="flex items-center w-full justify-center mb-5">
                         <Image
-                            src="/x.svg"
+                            src="/img/x.svg"
                             alt="Exit"
                             height={80}
                             width={80}

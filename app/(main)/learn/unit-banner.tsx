@@ -20,7 +20,7 @@ export const UnitBanner = ({
             <Link href="/lesson">
                 <Button 
                     size="lg"
-                    variant="super"
+                    variant="superOutline"
                     className="hidden xl:flex border-2 border-b-4 active:border-b-2"
                 >
                     <NotebookText className="mr-2"/>

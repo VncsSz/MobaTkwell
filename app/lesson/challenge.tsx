@@ -20,7 +20,7 @@ export const Challenge =({
     type,
 }: Props) => {
     return (
-        <div className={cn("w-full h-full")}>
+        <div className={cn("w-full h-full flex items-center justify-center")}>
             {options.map((option, i) => (
                 <Card
                     key={option.id}

@@ -82,6 +82,7 @@ export const Quiz = ({
 
         setSelecetedOption(id)
     }
+    // ASSIST PODERIA SER UM TIPO DE AVISO OU PROPAGANDA COM O CONTINUE
     //const title = challenge.type === "ASSIST" ? "Complete o jogo para avançar" : challenge.question
     const onNext = () => {
         setActiveIndex((current) => current + 1)
@@ -174,7 +175,7 @@ export const Quiz = ({
         }
     }
     //Finish Screen *
-    //Fiz Inifinity icon and a real XP points after shopping
+    //Fiz Inifinity icon and a real Pontos points after shopping
     if (!challenge) {
         return(
             <>
@@ -188,14 +189,14 @@ export const Quiz = ({
             />
             <div className="flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full">
                 <Image
-                    src="/finish.svg"
+                    src="/img/finish.svg"
                     alt="Finish"
                     className="hidden lg:block"
                     height={100}
                     width={100}
                 />
                 <Image
-                    src="/finish.svg"
+                    src="/img/finish.svg"
                     alt="Finish"
                     className="block lg:hidden"
                     height={50}
@@ -235,8 +236,8 @@ export const Quiz = ({
             />
             <div className="flex-1">
                 <div className="h-full flex items-center justify-center">
-                    <div className="lg:min-h-[350px] w-full lg:px-0 flex flex-col gap-y-12 max-h-full max-w-full">
-                        <div>
+                    <div className="w-full h-full flex flex-col gap-y-12 max-h-full max-w-full">
+                        <div className="flex-1 flex items-center justify-center">
                             {challenge.type === "ASSIST" && (
                                 <QuestionBubble question={challenge.question} />
                             )}

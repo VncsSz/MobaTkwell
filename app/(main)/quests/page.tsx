@@ -37,7 +37,7 @@ const QuestsPage = async () => {
             <FeedWrapper>
                 <div className="w-full flex flex-col items-center">
                     <Image 
-                    src="/quests.svg"
+                    src="/img/quests.svg"
                     alt="Quests"
                     height={90}
                     width={90}
@@ -51,6 +51,7 @@ const QuestsPage = async () => {
                     <ul className="w-full">
                         {quests.map((quest) => {
                             const progress = (userProgress.points / quest.value) * 100
+                            const imageSrc = progress >= 100 ? "/img/ok.svg" : "/img/points.svg"
                             
                             return (
                                 <div
@@ -58,8 +59,8 @@ const QuestsPage = async () => {
                                 key={quest.title}
                                 >
                                     <Image 
-                                        src="/points.svg"
-                                        alt="points"
+                                        src={imageSrc}
+                                        alt="progress status"
                                         width={60}
                                         height={60}
                                     />

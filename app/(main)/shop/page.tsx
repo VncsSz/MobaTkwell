@@ -37,7 +37,7 @@ const ShopPage = async () => {
             <FeedWrapper>
                 <div className="w-full flex flex-col items-center">
                     <Image 
-                    src="/shop.svg"
+                    src="/img/shop.svg"
                     alt="Shop"
                     height={90}
                     width={90}

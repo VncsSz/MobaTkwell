@@ -41,7 +41,7 @@ const LeaderboardPage = async () => {
             <FeedWrapper>
                 <div className="w-full flex flex-col items-center">
                     <Image 
-                    src="/leaderboard.svg"
+                    src="/img/leaderboard.svg"
                     alt="Leaderboard"
                     height={90}
                     width={90}
@@ -69,7 +69,7 @@ const LeaderboardPage = async () => {
                                 {userProgress.userName}
                             </p>
                             <p className="text-muted-foreground">
-                                {userProgress.points} XP
+                                {userProgress.points} Pontos
                             </p>
                         </div>
                     ))}

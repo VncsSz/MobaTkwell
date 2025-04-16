@@ -33,7 +33,7 @@ if(existingUserProgress) {
     await db.update(userProgress).set({
         activeCourseId: courseId,
         userName: user.firstName || "user",
-        userImageSrc: user.imageUrl || "TWLogo.svg",
+        userImageSrc: user.imageUrl || "img/TWLogo.svg",
     })
 
     revalidatePath("/courses")
@@ -45,7 +45,7 @@ await db.insert(userProgress).values({
     userId,
     activeCourseId: courseId,
     userName: user.firstName || "user",
-    userImageSrc: user.imageUrl || "TWLogo.svg",
+    userImageSrc: user.imageUrl || "img/TWLogo.svg",
 })
 
 revalidatePath("/courses")

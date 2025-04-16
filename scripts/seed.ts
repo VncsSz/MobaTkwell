@@ -26,22 +26,22 @@ const main = async () => {
             {
                 id: 1,
                 title: "Aprendiz",
-                imageSrc: "ap.svg",
+                imageSrc: "img/ap.svg",
             },
             {
                 id: 2,
                 title: "Mestre",
-                imageSrc: "me.svg",
+                imageSrc: "img/me.svg",
             },
             {
                 id: 3,
                 title: "Profissional",
-                imageSrc: "pr.svg",
+                imageSrc: "img/pr.svg",
             },
             {
                 id: 4,
                 title: "Experiente",
-                imageSrc: "ex.svg",
+                imageSrc: "img/ex.svg",
             },
         ])
 

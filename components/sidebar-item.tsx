@@ -9,12 +9,14 @@ type Props = {
     label: string;
     iconSrc: string;
     href: string;
+    onSelect?: () => void;
 }
 
 export const SidebarItem = ({
     label,
     iconSrc,
     href,
+    onSelect,
 }: Props) => {
     const pathname = usePathname();
     const active = pathname === href;
@@ -24,7 +26,7 @@ export const SidebarItem = ({
         className="justify-start h-[52px]"
         asChild
         >
-            <Link href={href}>
+            <Link href={href} onClick={onSelect}>
             <Image 
             src={iconSrc}
             alt={label}

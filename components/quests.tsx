@@ -27,6 +27,7 @@ export const Quests = ({points}: Props) => {
             <ul className="w-full space-y-4">
                 {quests.map((quest) => {
                     const progress = (points / quest.value) * 100
+                    const imageSrc = progress >= 100 ? "/img/ok.svg" : "/img/points.svg"
                             
                     return (
                         <div
@@ -34,8 +35,8 @@ export const Quests = ({points}: Props) => {
                         key={quest.title}
                         >
                             <Image 
-                                src="/points.svg"
-                                alt="points"
+                                src={imageSrc}
+                                alt="progress status"
                                 width={40}
                                 height={40}
                             />
