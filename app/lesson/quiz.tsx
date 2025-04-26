@@ -41,6 +41,14 @@ export const Quiz = ({
     const { open: openHeartsModal } = useHeartsModal()
     const { open: openPracticeModal } = usePracticeModal()
 
+    useEffect(() => {
+        // Verifica se o usuário tem corações ao abrir o desafio, exceto se for prática
+        const isPractice = initialPercentage === 100
+        if (initialHearts === 0 && !userSubscription?.isActive && !isPractice) {
+            openHeartsModal()
+        }
+    }, [initialHearts, userSubscription, openHeartsModal, initialPercentage])
+
     useMount(() => {
         if (initialPercentage === 100) {
             openPracticeModal()

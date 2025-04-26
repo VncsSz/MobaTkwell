@@ -13,24 +13,36 @@ export const upsertUserProgress = async (courseId: number) => {
     const { userId } = await auth()
     const user = await currentUser()
 
-if (!userId || !user) {
-    throw new Error("Sem autorização")
-}
+    if (!userId || !user) {
+        throw new Error("Sem autorização")
+    }
 
-const course = await getCourseById(courseId);
+    const course = await getCourseById(courseId);
 
-if(!course) {
-    throw new Error("Curso não encontrado")
-}
+    if (!course) {
+        throw new Error("Curso não encontrado")
+    }
 
-if (!course.units.length || !course.units[0].lessons.length) {
-    throw new Error("Curso vazio")
-} 
+    if (!course.units.length || !course.units[0].lessons.length) {
+        throw new Error("Curso vazio")
+    }
 
-const existingUserProgress = await getUserProgress()
+    const existingUserProgress = await getUserProgress()
 
-if(existingUserProgress) {
-    await db.update(userProgress).set({
+    if (existingUserProgress) {
+        await db.update(userProgress).set({
+            activeCourseId: courseId,
+            userName: user.firstName || "user",
+            userImageSrc: user.imageUrl || "img/TWLogo.svg",
+        }).where(eq(userProgress.userId, userId)) // Filtra pelo userId
+
+        revalidatePath("/courses")
+        revalidatePath("/learn")
+        redirect("/learn")
+    }
+
+    await db.insert(userProgress).values({
+        userId,
         activeCourseId: courseId,
         userName: user.firstName || "user",
         userImageSrc: user.imageUrl || "img/TWLogo.svg",
@@ -41,22 +53,10 @@ if(existingUserProgress) {
     redirect("/learn")
 }
 
-await db.insert(userProgress).values({
-    userId,
-    activeCourseId: courseId,
-    userName: user.firstName || "user",
-    userImageSrc: user.imageUrl || "img/TWLogo.svg",
-})
-
-revalidatePath("/courses")
-revalidatePath("/learn")
-redirect("/learn")
-}
-
 export const reduceHearts = async (challengeId: number) => {
     const { userId } = await auth()
 
-    if(!userId) {
+    if (!userId) {
         throw new Error("Acesso negado!")
     }
 
@@ -82,20 +82,20 @@ export const reduceHearts = async (challengeId: number) => {
 
     const isPractice = !!existingChallengeProgress
 
-    if(isPractice) {
+    if (isPractice) {
         return { error: "practice" }
     }
 
-    if(!currentUserProgress) {
+    if (!currentUserProgress) {
         throw new Error("Progresso de usuário não encontrado")
     }
 
-    if(userSubscription?.isActive) {
+    if (userSubscription?.isActive) {
         return { error: "subscription" }
     }
 
-    if(currentUserProgress.hearts === 0) {
-        return {error: "hearts"}
+    if (currentUserProgress.hearts === 0) {
+        return { error: "hearts" }
     }
 
     await db.update(userProgress).set({
