@@ -102,6 +102,11 @@ export const Quiz = ({
     useEffect(() => {
         // Certifique-se de que o código só roda no client-side
         const handleMessage = (event: MessageEvent) => {
+
+            if (!event.data || typeof event.data.gameStatus === "undefined") {
+                            return;
+            }
+            
             if (gameMessage) {
                 return; // Evita múltiplas execuções
             }
