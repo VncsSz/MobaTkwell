@@ -5,14 +5,14 @@ export const ChallengeList = () => {
         <List>
             <Datagrid rowClick="edit">
                 <NumberField source="id" />
-                <TextField source="question" 
+                <TextField source="gameTitle" 
                 //Trocar question por title no schema e aqui
                 />
                 <SelectField 
                     source="type" 
                     choices={[
-                        { id: 'SELECT', name: 'SELECT' },
-                        { id: 'ASSIST', name: 'ASSIST' },
+                        { id: 'GAME', name: 'GAME' },
+                        { id: 'EXTRA', name: 'EXTRA' },
                     ]} 
                 />
                 <ReferenceField source="lessonId" reference="lessons" />

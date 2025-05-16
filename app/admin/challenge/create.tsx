@@ -4,14 +4,14 @@ export const ChallengeCreate = () => {
     return (
         <Create>
             <SimpleForm>
-                <TextInput source="question" label="Question" validate={[required()]} 
+                <TextInput source="gameTitle" label="GameTitle" validate={[required()]} 
                 //Question por title
                 />
                 <SelectInput 
                     source="type" 
                     choices={[
-                        { id: 'SELECT', name: 'SELECT' },
-                        { id: 'ASSIST', name: 'ASSIST' },
+                        { id: 'GAME', name: 'GAME' },
+                        { id: 'EXTRA', name: 'EXTRA' },
                     ]}
                     validate={[required()]}
                 />

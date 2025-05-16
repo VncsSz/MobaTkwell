@@ -4,10 +4,10 @@ export const ChallengeOptionCreate = () => {
     return (
         <Create>
             <SimpleForm>
-                <TextInput source="game" label="Game URL" validate={[required()]} 
+                <TextInput source="gameSrc" label="Game URL" validate={[required()]} 
                 //TROCAR GAME POR gameSrc
                 />
-                <BooleanInput source="correct" label="Game finish" />
+                <BooleanInput source="friendly" label="Game friendly" />
                 <ReferenceInput source="challengeId" reference="challenges"/>
                 <TextInput source="imageSrc" label="Image URL"/>
                 <TextInput source="audioSrc" label="Audio URL"/>

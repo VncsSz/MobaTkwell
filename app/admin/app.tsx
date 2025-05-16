@@ -54,7 +54,7 @@ const App = () => {
                 list={ChallengeList} 
                 create={ChallengeCreate}
                 edit={ChallengeEdit}
-                recordRepresentation="question" 
+                recordRepresentation="gameTitle" 
             />
             <Resource 
                 name="challengeOptions" 

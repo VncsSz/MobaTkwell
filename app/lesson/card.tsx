@@ -9,7 +9,7 @@ type Props = {
     id: number
     imageSrc: string | null
     audioSrc: string | null
-    game: string
+    gameSrc: string
     shortcut: string
     selected?: boolean
     onClick: () => void
@@ -22,7 +22,7 @@ export const Card = ({
     id,
     imageSrc,
     audioSrc,
-    game,
+    gameSrc,
     shortcut,
     selected,
     onClick,
@@ -46,13 +46,13 @@ export const Card = ({
             onClick={handleClick}
             className={cn(
                 "h-full w-full cursor-pointer flex justify-center items-center relative",
-                type === "ASSIST" && "lg:p-3"
+                type === "EXTRA" && "lg:p-3"
             )}
         >
             <div className="relative w-full h-full flex justify-center items-center">
                 {/* Iframe principal */}
                 <iframe 
-                    src={`${game}`}
+                    src={`${gameSrc}`}
                     className="w-full h-full"
                 ></iframe>
 

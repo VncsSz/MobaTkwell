@@ -25,7 +25,7 @@ export const Challenge =({
                 <Card
                     key={option.id}
                     id={option.id}
-                    game={option.game}
+                    gameSrc={option.gameSrc}
                     imageSrc={option.imageSrc}
                     //APAGAR SHORTCUT
                     shortcut={`${i+1}`}

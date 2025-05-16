@@ -91,7 +91,7 @@ export const Quiz = ({
         setSelecetedOption(id)
     }
     // ASSIST PODERIA SER UM TIPO DE AVISO OU PROPAGANDA COM O CONTINUE
-    //const title = challenge.type === "ASSIST" ? "Complete o jogo para avançar" : challenge.question
+    //const title = challenge.type === "ASSIST" ? "Complete o jogo para avançar" : challenge.gameTitle
     const onNext = () => {
         setActiveIndex((current) => current + 1)
     }
@@ -100,15 +100,16 @@ export const Quiz = ({
     const [gameCompleted, setGameCompleted] = useState(false);
 
     useEffect(() => {
-        // Certifique-se de que o código só roda no client-side
+        // Código só roda no client-side
         const handleMessage = (event: MessageEvent) => {
-
+            // Verifica se o evento contém os dados esperados
             if (!event.data || typeof event.data.gameStatus === "undefined") {
-                            return;
+                return;
             }
-            
+
+            // Evita múltiplas atualizações desnecessárias
             if (gameMessage) {
-                return; // Evita múltiplas execuções
+                return;
             }
 
             setGameMessage(true);
@@ -124,7 +125,6 @@ export const Quiz = ({
     }, [gameMessage]);
 
     const onContinue = () => {
-        //APAGAR ESSE RETURN
 
         //Só poder liberar o jogo novamente quando passar por esse IF (seja por enviar uma mensagem p jogo reiniciar ou bloquear o iframe)
         if (status === "wrong") {
@@ -145,14 +145,12 @@ export const Quiz = ({
 
         console.log(gameMessage)
         
-       // const correctOption = options.find((option) => option.correct)
-        // DEFINIR COMO VAI FICAR A PARTE DA OPÇÂO CORRETA PARA ATIVAR O BOTAO NEXT
+       //const correctOption = options.find((option) => option.friendly)
 
        //if (!correctOption){
             //return
         //}
         
-        //ADICONAR O RETORNO DO IFRAME PARA "OPÇAO CORRETA" QUANDO O JOGO É CONCLUIDO
         if(gameCompleted) {
             startTransition(() => {
                 upsertChallengeProgress(challenge.id).then((response) => {
@@ -188,7 +186,7 @@ export const Quiz = ({
         }
     }
     //Finish Screen *
-    //Fiz Inifinity icon and a real Pontos points after shopping
+    //Infinity icon and a real points after shopping
     if (!challenge) {
         return(
             <>
@@ -251,8 +249,8 @@ export const Quiz = ({
                 <div className="h-full flex items-center justify-center">
                     <div className="w-full h-full flex flex-col gap-y-12 max-h-full max-w-full">
                         <div className="flex-1 flex items-center justify-center">
-                            {challenge.type === "ASSIST" && (
-                                <QuestionBubble question={challenge.question} />
+                            {challenge.type === "EXTRA" && (
+                                <QuestionBubble gameTitle={challenge.gameTitle} />
                             )}
                             <Challenge 
                             //APAGAR FUNÇÂO NÂO UTILIZADA, COMO SELECT (MANTER STATUS)
