@@ -4,9 +4,7 @@ export const ChallengeCreate = () => {
     return (
         <Create>
             <SimpleForm>
-                <TextInput source="gameTitle" label="GameTitle" validate={[required()]} 
-                //Question por title
-                />
+                <TextInput source="gameTitle" label="GameTitle" validate={[required()]}/>
                 <SelectInput 
                     source="type" 
                     choices={[

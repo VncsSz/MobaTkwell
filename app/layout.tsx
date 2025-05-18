@@ -9,7 +9,6 @@ import { HeartsModal } from "@/components/modals/hearts-modal";
 import { PracticeModal } from "@/components/modals/practice-modal";
 
 const font = Nunito({ subsets: ["latin"] });
-//TROCAR O NOME DO APP OK
 //Ver load para colocar simbolo CNPQ
 export const metadata: Metadata = {
   title: {

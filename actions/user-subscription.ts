@@ -38,7 +38,7 @@ export const createStripeUrl = async () => {
                         name: "ThinkWell VIP",
                         description: "Vidas infinitas",
                     },
-                    unit_amount: 2000, //R$20,00
+                    unit_amount: 500, //R$5,00
                     recurring: {
                         interval: "month",
                     }

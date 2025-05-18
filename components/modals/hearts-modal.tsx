@@ -63,7 +63,6 @@ export const HeartsModal = () => {
                             className="w-full"
                             size="lg"
                             onClick={() => {
-                                //talvez tirar o close resolva, deixar só o redirecionamento e fazer onClick como na opção acima
                                 close()
                                 window.location.href = "/learn"
                             }}

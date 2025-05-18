@@ -4,13 +4,11 @@ import { Loader } from "lucide-react"
 import Image from "next/image"
 import { useCallback } from "react"
 import { useAudio, useKey } from "react-use"
-//FAZER UMA SEQUENCIA DE JOGOS DENTRO DO CARD ok
 type Props = {
     id: number
     imageSrc: string | null
     audioSrc: string | null
     gameSrc: string
-    shortcut: string
     selected?: boolean
     onClick: () => void
     disabled?: boolean
@@ -23,7 +21,6 @@ export const Card = ({
     imageSrc,
     audioSrc,
     gameSrc,
-    shortcut,
     selected,
     onClick,
     status,
@@ -31,15 +28,13 @@ export const Card = ({
     type,
 }: Props) => {
     const [audio, _, controls] = useAudio({ src: audioSrc || ""})
-    // TIRAR AUDIO E IMAGEM, CONSERTAR LAYOUT E TIRAR HANDLECLICK E USEKEY
+
     const handleClick = useCallback(() => {
         if (disabled) return
 
         controls.play()
         onClick()
     }, [disabled, onClick, controls])
-
-    useKey(shortcut, handleClick, {}, [handleClick])
 
     return (
         <div

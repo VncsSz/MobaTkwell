@@ -80,18 +80,17 @@ export const Quiz = ({
         return uncompletedIndex === -1 ? 0 : uncompletedIndex
     })
     const challenge = challenges[activeIndex]
-    //APAGAR SELECT OPTION
+    //SELECT OPTION
     const [selectedOption, setSelecetedOption] = useState<number>()
     const [status, setStatus] = useState<"correct" | "wrong" | "none">("none")
-    //APAGAR SELECT
+    //SELECT
     const options = challenge?.challengeOptions ?? []
     const onSelect = (id: number) => {
         if (status !== "none") return
 
         setSelecetedOption(id)
     }
-    // ASSIST PODERIA SER UM TIPO DE AVISO OU PROPAGANDA COM O CONTINUE
-    //const title = challenge.type === "ASSIST" ? "Complete o jogo para avançar" : challenge.gameTitle
+    //const title = challenge.type === "EXTRA" ? "Complete o jogo para avançar" : challenge.gameTitle
     const onNext = () => {
         setActiveIndex((current) => current + 1)
     }
@@ -100,7 +99,7 @@ export const Quiz = ({
     const [gameCompleted, setGameCompleted] = useState(false);
 
     useEffect(() => {
-        // Código só roda no client-side
+        //Only client-side
         const handleMessage = (event: MessageEvent) => {
             // Verifica se o evento contém os dados esperados
             if (!event.data || typeof event.data.gameStatus === "undefined") {
@@ -149,7 +148,7 @@ export const Quiz = ({
 
        //if (!correctOption){
             //return
-        //}
+       //}
         
         if(gameCompleted) {
             startTransition(() => {
@@ -253,7 +252,7 @@ export const Quiz = ({
                                 <QuestionBubble gameTitle={challenge.gameTitle} />
                             )}
                             <Challenge 
-                            //APAGAR FUNÇÂO NÂO UTILIZADA, COMO SELECT (MANTER STATUS)
+                            //SELECT
                                 options={options}
                                 onSelect={onSelect}
                                 status={status}

@@ -27,8 +27,6 @@ export const Challenge =({
                     id={option.id}
                     gameSrc={option.gameSrc}
                     imageSrc={option.imageSrc}
-                    //APAGAR SHORTCUT
-                    shortcut={`${i+1}`}
                     selected={selectedOption}
                     onClick={() => onSelect(option.id)}
                     status={status}

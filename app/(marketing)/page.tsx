@@ -47,6 +47,14 @@ export default function Home() {
                     Continue aprendendo
                   </Link>
                 </Button>
+                <div className="w-full flex flex-col items-center mt-2 sm:hidden">
+                  <span className="mb-2 text-sm text-gray-400">Powered by</span>
+                  <img
+                    src="/img/cnpq.svg"
+                    alt="Logo"
+                    className="w-32 h-auto sm:w-40 md:w-48"
+                  />
+                </div>
               </SignedIn>
             </ClerkLoaded>
           </div>

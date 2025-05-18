@@ -57,7 +57,6 @@ export const Items = ({
                     </p>
                 </div>
                 <Button 
-                     //Desativar botão se o usuario for vip OK
                     disabled={hearts === 5 || points < POINTS_TO_REFILL || pending || hasActiveSubscription}
                     onClick={onRefillHearts}
                     >

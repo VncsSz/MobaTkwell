@@ -5,9 +5,7 @@ export const ChallengeList = () => {
         <List>
             <Datagrid rowClick="edit">
                 <NumberField source="id" />
-                <TextField source="gameTitle" 
-                //Trocar question por title no schema e aqui
-                />
+                <TextField source="gameTitle"/>
                 <SelectField 
                     source="type" 
                     choices={[

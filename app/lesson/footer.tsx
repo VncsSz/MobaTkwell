@@ -17,8 +17,6 @@ export const Footer = ({
     disabled,
     lessonId,
 }: Props) => {
-    //Usa o teclado para confirmar a seleção, assim como o shortcut (remover ambos)
-    useKey("Enter", onCheck, {}, [onCheck])
 
     useEffect(() => {
         if (!disabled && status === "none") {
