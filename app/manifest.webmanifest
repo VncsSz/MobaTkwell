@@ -15,7 +15,47 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "theme_color": "#9333ea",
+  "background_color": "#9333ea",
+  "display": "standalone",
+  "orientation": "portrait",
+  "lang": "pt",
+  "categories": [
+    "education",
+    "entertainment",
+    "games",
+    "kids"
+  ],
+  "screenshots": [
+    {
+      "src":"/img/print/p1.jpeg",
+      "sizes":"750x1334",
+      "type":"image/png"
+    },
+    {
+      "src":"/img/print/p2.jpeg",
+      "sizes":"750x1334",
+      "type":"image/png"
+    },
+    {
+      "src":"/img/print/p3.jpeg",
+      "sizes":"750x1334",
+      "type":"image/png"
+    },
+    {
+      "src":"/img/print/p4.jpeg",
+      "sizes":"750x1334",
+      "type":"image/png"
+    },
+    {
+      "src":"/img/print/p5.jpeg",
+      "sizes":"750x1334",
+      "type":"image/png"
+    },
+    {
+      "src":"/img/print/p6.jpeg",
+      "sizes":"750x1334",
+      "type":"image/png"
+    }
+  ]
 }
