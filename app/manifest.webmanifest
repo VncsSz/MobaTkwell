@@ -28,32 +28,32 @@
   ],
   "screenshots": [
     {
-      "src":"/img/print/p1.jpeg",
+      "src":"/img/prints/p1.png",
       "sizes":"750x1334",
       "type":"image/png"
     },
     {
-      "src":"/img/print/p2.jpeg",
+      "src":"/img/prints/p2.png",
       "sizes":"750x1334",
       "type":"image/png"
     },
     {
-      "src":"/img/print/p3.jpeg",
+      "src":"/img/prints/p3.png",
       "sizes":"750x1334",
       "type":"image/png"
     },
     {
-      "src":"/img/print/p4.jpeg",
+      "src":"/img/prints/p4.png",
       "sizes":"750x1334",
       "type":"image/png"
     },
     {
-      "src":"/img/print/p5.jpeg",
+      "src":"/img/prints/p5.png",
       "sizes":"750x1334",
       "type":"image/png"
     },
     {
-      "src":"/img/print/p6.jpeg",
+      "src":"/img/prints/p6.png",
       "sizes":"750x1334",
       "type":"image/png"
     }
